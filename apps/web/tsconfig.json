@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/app/*": ["src/app/*"],
+      "@/components/*": ["src/components/*"],
+      "@/canvas/*": ["src/canvas/*"],
+      "@/db/*": ["src/db/*"],
+      "@/lib/*": ["src/lib/*"],
+      "@/state/*": ["src/state/*"]
+    }
+  },
+  "include": ["src", "vite-env.d.ts"]
+}

@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Method {
+  id          Int       @id @default(autoincrement())
+  name        String
+  gwpSet      String?
+  description String?
+  datasets    Dataset[]
+  projects    Project[]
+}
+
+model Dataset {
+  id        Int     @id @default(autoincrement())
+  name      String
+  source    String?
+  year      Int?
+  geo       String?
+  unit      String
+  valueCO2e Float
+  kind      String
+  methodId  Int?
+  method    Method? @relation(fields: [methodId], references: [id])
+}
+
+model Project {
+  id       Int     @id @default(autoincrement())
+  name     String
+  methodId Int?
+  graphs   Graph[]
+  method   Method? @relation(fields: [methodId], references: [id])
+}
+
+model Graph {
+  id        Int      @id @default(autoincrement())
+  name      String
+  json      String
+  projectId Int
+  createdAt DateTime @default(now())
+  project   Project  @relation(fields: [projectId], references: [id])
+}
